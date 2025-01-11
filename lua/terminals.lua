@@ -6,12 +6,12 @@ local state = {
 }
 
 local win_config = {
-	relative = "editor",
-	width = vim.o.columns - 4,
-	height = vim.o.lines - 4,
-	row = 2,
-	col = 2,
-	border = "rounded",
+	relative = "win",
+	width = vim.o.columns,
+	height = 10,
+	row = vim.o.lines - 10,
+	col = 0,
+	border = "single",
 	style = "minimal",
 }
 
@@ -47,6 +47,7 @@ function M.create_new_term()
 	table.insert(state.list, item)
 	state.active_idx = #state.list
 	state.visible = true
+	vim.cmd.terminal()
 end
 
 function M.toggle_term()
@@ -61,12 +62,5 @@ function M.show_all() end
 
 function M.go_back() end
 
-function M.setup()
-	vim.keymap.set({ "n", "t" }, "<leader>tt", M.create_new_term)
-	vim.keymap.set("n", "<leader>tn", M.show_next)
-	vim.keymap.set("n", "<leader>tp", M.show_prev)
-	vim.keymap.set("n", "<leader>th", M.hide_term)
-	vim.keymap.set({ "n" }, "<leader>tl", M.show_term)
-	vim.keymap.set({ "n", "t" }, "<leader>ta", M.show_all)
-end
+function M.setup() end
 return M
